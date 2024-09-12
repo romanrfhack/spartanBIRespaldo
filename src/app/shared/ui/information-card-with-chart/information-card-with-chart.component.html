@@ -1,0 +1,29 @@
+<div class="flex items-center justify-center h-screen chart-container-general-bi"
+     [style.height]="dataComponete?.height ? dataComponete?.height : '220px'"
+     [style.width]="dataComponete?.width ? dataComponete?.width : '220px'"
+     style="background-color: white;">
+
+    <ng-container *ngIf="dataComponete; else Loader"> 
+        <div class="flex items-center justify-center h-screen bi-information-card-component" [style.width]="dataComponete?.width" [style.height]="dataComponete?.height" >
+            <div class="flex items-center justify-center h-screen bi-container-information-card-component" [style.width]="dataComponete?.width" [style.height]="dataComponete?.height">
+                <div class="bi-header-information-card">
+                    <span class="title" [matTooltip]="dataComponete?.label">{{dataComponete?.label}}</span>
+                    <mat-icon>{{dataComponete?.icon}}</mat-icon>
+                </div>
+                <div class="bi-body-information-card">
+                    <kendo-arcgauge [transitions]="true" [color]="'#dea600'"
+                        [value]="dataComponete?.values.percentageValue" class="bi-kendo-arcgauge">
+                        <ng-template kendoArcGaugeCenterTemplate let-value="value" let-color="color"
+                            class="container-value-percentage">
+                            <span class="value-percentage">{{ value }}%</span>
+                        </ng-template>
+                    </kendo-arcgauge>
+                    <span class="value">{{dataComponete?.values.value}}</span>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+</div>
+<ng-template #Loader>
+    <app-spinner></app-spinner>
+</ng-template>
